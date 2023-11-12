@@ -116,18 +116,28 @@ std::vector<int> calculate(int targetCoin, int currentCoin, std::function<bool(S
 
 void output(std::string patternName, std::vector<int>& operationCount)
 {
-    std::cout << ' ' << patternName << '\n';
+    int totalCoins = 0;  // 買うコイン数の合計
+    int totalPrice = 0;  // 合計金額
+
+    std::cout << "\n " << patternName << '\n';
 
     for (int i = 0; i < (int)operationCount.size(); ++i) {
         int count = operationCount[i];
+
+        int coin = purchases[i].coin;
+        int yen = purchases[i].yen;
+
+        totalCoins += coin * count;
+        totalPrice += yen * count;
 
         if (count == 0) {
             continue;
         }
 
-        std::cout << ' ' << purchases[i].coin << " coins  " << purchases[i].yen << " yen  " << count << " times\n";
+        std::cout << ' ' << coin << " coins  " << yen << " yen  " << count << " times\n";
     }
-    std::cout << std::flush;
+
+    std::cout << "\n total  " << totalCoins << " coins   " << totalPrice << " yen" << std::endl;
 
     return;
 }
